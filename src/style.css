@@ -73,6 +73,10 @@ main {
   margin-top: 6px;
   font-size: 28px;
 }
+.weather-forecast {
+  display: flex;
+  justify-content: space-between;
+}
 
 footer {
   border-top: 1px solid #f9f7fe;
