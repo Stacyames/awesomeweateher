@@ -19,6 +19,7 @@ function refreshWeather(response) {
                 src="${response.data.condition.icon_url}"
                 class="weather-app-icon"
               />`;
+  getForecast(response.data.city);
 }
 
 function formatDate(date) {
@@ -42,7 +43,7 @@ function formatDate(date) {
 
 function searchCity(city) {
   let apikey = "ca343a7957df5t028e1co7b31903abc6";
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apikey}`;
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apikey}&units=metric`;
   axios.get(apiUrl).then(refreshWeather);
 }
 
@@ -53,7 +54,13 @@ function handleSearchSubmit(event) {
   searchCity(searchInput.value);
 }
 
-function displayForecast() {
+function getForecast(city) {
+  let apiKey = "ca343a7957df5t028e1co7b31903abc6";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
+  axios(apiUrl).then(displayForecast);
+}
+
+function displayForecast(response) {
   let days = ["Tue", "Wed", "Thu", "Fri", "Sat"];
   let forecastHtml = "";
 
@@ -82,4 +89,4 @@ let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", handleSearchSubmit);
 
 searchCity("Guelph");
-displayForecast();
+getForecast("Guelph");
